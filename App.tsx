@@ -20,7 +20,6 @@ const App = () => {
           name={RoutesNames.Player}
           component={VideoPlayerPage}
           options={{
-            title: RoutesNames.Player,
             animation: "slide_from_right",
             headerShown: false,
           }}
