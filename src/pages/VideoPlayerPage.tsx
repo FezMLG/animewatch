@@ -4,6 +4,7 @@ import React, { useRef, useState } from "react";
 import Controls from "../components/Controls";
 
 const VideoPlayerPage = ({ navigation, route }: any) => {
+  const { title } = route.params;
   const DEBUG = false;
   const video = useRef<Video>(null);
   const [status, setStatus] = useState<any>({});

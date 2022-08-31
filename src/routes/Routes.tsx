@@ -42,6 +42,14 @@ const Routes = () => {
             animation: "slide_from_right",
           })}
         />
+        <Stack.Screen
+          name={RoutesNames.Watch}
+          component={VideoPlayerPage}
+          options={{
+            animation: "slide_from_right",
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -31,7 +31,14 @@ const SeriesPage = ({ navigation, route }: any) => {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         {data && (
-          <Pressable style={styles.card}>
+          <Pressable
+            style={styles.card}
+            onPress={() => {
+              navigation.navigate(RoutesNames.Watch, {
+                title: data.Media.title.romaji,
+              });
+            }}
+          >
             <Image
               style={styles.poster}
               source={{ uri: data.Media.coverImage.extraLarge }}
