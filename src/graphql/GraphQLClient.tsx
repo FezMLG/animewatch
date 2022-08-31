@@ -3,7 +3,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 // Initialize Apollo Client
 const client = new ApolloClient({
-  uri: "localhost:4000/graphql",
+  uri: "https://graphql.anilist.co/",
   cache: new InMemoryCache(),
 });
 

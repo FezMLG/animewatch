@@ -11,6 +11,10 @@ const HomePage = ({ navigation }: any) => {
           navigation.navigate(RoutesNames.Player, { videoTitle: "Jane" })
         }
       />
+      <Button
+        title="Browse"
+        onPress={() => navigation.navigate(RoutesNames.Browse)}
+      />
     </View>
   );
 };

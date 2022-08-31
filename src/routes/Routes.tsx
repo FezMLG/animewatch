@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomePage from "../pages/HomePage";
 import VideoPlayerPage from "../pages/VideoPlayerPage";
 import { RoutesNames } from "./RoutesNames.enum";
+import BrowsePage from "../pages/BrowsePage";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,14 @@ const Routes = () => {
           options={{
             animation: "slide_from_right",
             headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={RoutesNames.Browse}
+          component={BrowsePage}
+          options={{
+            title: RoutesNames.Browse,
+            animation: "slide_from_right",
           }}
         />
       </Stack.Navigator>
