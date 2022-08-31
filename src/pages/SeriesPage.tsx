@@ -13,10 +13,11 @@ import { useQuery } from "@apollo/client";
 import { ITitleInfo } from "../interfaces";
 import { TITLE_INFO } from "../graphql/api/anilist/titleInfo";
 
-const SeriesPage = ({ navigation }: any, props: { titleId: number }) => {
+const SeriesPage = ({ navigation, route }: any) => {
+  const { id, title } = route.params;
   const { loading, error, data } = useQuery<ITitleInfo>(TITLE_INFO, {
     variables: {
-      id: props.titleId,
+      id,
     },
   });
 

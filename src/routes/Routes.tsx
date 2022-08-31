@@ -5,6 +5,7 @@ import HomePage from "../pages/HomePage";
 import VideoPlayerPage from "../pages/VideoPlayerPage";
 import { RoutesNames } from "./RoutesNames.enum";
 import BrowsePage from "../pages/BrowsePage";
+import SeriesPage from "../pages/SeriesPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,14 @@ const Routes = () => {
             title: RoutesNames.Browse,
             animation: "slide_from_right",
           }}
+        />
+        <Stack.Screen
+          name={RoutesNames.Series}
+          component={SeriesPage}
+          options={({ route }: any) => ({
+            title: route.params.title,
+            animation: "slide_from_right",
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>

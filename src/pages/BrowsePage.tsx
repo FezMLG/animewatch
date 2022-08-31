@@ -28,7 +28,16 @@ const BrowsePage = ({ navigation }: any) => {
         {data &&
           data.Page.media.map((anime, index) => {
             return (
-              <Pressable key={index} style={styles.card}>
+              <Pressable
+                key={index}
+                style={styles.card}
+                onPress={() => {
+                  navigation.navigate(RoutesNames.Series, {
+                    id: anime.id,
+                    title: anime.title.romaji,
+                  });
+                }}
+              >
                 <Image
                   style={styles.poster}
                   source={{ uri: anime.coverImage.extraLarge }}
