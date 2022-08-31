@@ -1,6 +1,6 @@
 import { StyleSheet, View, Button } from "react-native";
 import React from "react";
-import { RoutesNames } from "../enums/RoutesNames.enum";
+import { RoutesNames } from "../routes/RoutesNames.enum";
 
 const HomePage = ({ navigation }: any) => {
   return (
