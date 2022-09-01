@@ -7,11 +7,5 @@ export const searchForTitle = async (title: string) => {
   )}`;
   console.log(baseURL);
   const response = await new RestClient(baseURL).get<IFrixySearchResults>();
-
-  if (response.rows_num == 1) {
-    return response.series[0];
-  } else if (response.rows_num > 1) {
-    return "Specify search";
-  }
-  return "No results found";
+  return response;
 };
