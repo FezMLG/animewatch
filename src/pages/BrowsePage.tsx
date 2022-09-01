@@ -11,10 +11,10 @@ import React from "react";
 import { RoutesNames } from "../routes/RoutesNames.enum";
 import { useQuery } from "@apollo/client";
 import { LIST_OF_ANIME } from "../api/graphql/anilist/listOfAnime";
-import { ListOfAnime } from "../interfaces";
+import { IALListOfAnime } from "../interfaces";
 
 const BrowsePage = ({ navigation }: any) => {
-  const { loading, error, data } = useQuery<ListOfAnime>(LIST_OF_ANIME);
+  const { loading, error, data } = useQuery<IALListOfAnime>(LIST_OF_ANIME);
 
   // if (loading) return null;
   // if (error) return `Error! ${error}`;

@@ -1,4 +1,4 @@
-export interface ListOfAnime {
+export interface IALListOfAnime {
   Page: Page;
 }
 

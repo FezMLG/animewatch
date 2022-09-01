@@ -10,12 +10,12 @@ import {
 import React from "react";
 import { RoutesNames } from "../routes/RoutesNames.enum";
 import { useQuery } from "@apollo/client";
-import { ITitleInfo } from "../interfaces";
+import { IALTitleInfo } from "../interfaces";
 import { TITLE_INFO } from "../api/graphql/anilist/titleInfo";
 
 const SeriesPage = ({ navigation, route }: any) => {
   const { id, title } = route.params;
-  const { loading, error, data } = useQuery<ITitleInfo>(TITLE_INFO, {
+  const { loading, error, data } = useQuery<IALTitleInfo>(TITLE_INFO, {
     variables: {
       id,
     },

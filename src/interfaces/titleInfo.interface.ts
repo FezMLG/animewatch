@@ -1,4 +1,4 @@
-export interface ITitleInfo {
+export interface IALTitleInfo {
   Media: Media;
 }
 
