@@ -11,7 +11,7 @@ import React from "react";
 import { RoutesNames } from "../routes/RoutesNames.enum";
 import { useQuery } from "@apollo/client";
 import { ITitleInfo } from "../interfaces";
-import { TITLE_INFO } from "../graphql/api/anilist/titleInfo";
+import { TITLE_INFO } from "../api/graphql/anilist/titleInfo";
 
 const SeriesPage = ({ navigation, route }: any) => {
   const { id, title } = route.params;

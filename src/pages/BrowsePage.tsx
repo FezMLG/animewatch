@@ -10,7 +10,7 @@ import {
 import React from "react";
 import { RoutesNames } from "../routes/RoutesNames.enum";
 import { useQuery } from "@apollo/client";
-import { LIST_OF_ANIME } from "../graphql/api/anilist/listOfAnime";
+import { LIST_OF_ANIME } from "../api/graphql/anilist/listOfAnime";
 import { ListOfAnime } from "../interfaces";
 
 const BrowsePage = ({ navigation }: any) => {
