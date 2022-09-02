@@ -1,12 +1,15 @@
 import React from "react";
 import GraphQLClient from "./src/api/graphql/GraphQLClient";
+import QueryClientWrap from "./src/api/rest/QueryClientWrap";
 import Routes from "./src/routes/Routes";
 
 const App = () => {
   return (
-    <GraphQLClient>
-      <Routes />
-    </GraphQLClient>
+    <QueryClientWrap>
+      <GraphQLClient>
+        <Routes />
+      </GraphQLClient>
+    </QueryClientWrap>
   );
 };
 
