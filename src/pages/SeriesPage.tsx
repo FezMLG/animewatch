@@ -6,12 +6,14 @@ import {
   ScrollView,
   Pressable,
   Image,
+  Button,
 } from "react-native";
 import React from "react";
 import { RoutesNames } from "../routes/RoutesNames.enum";
 import { useQuery } from "@apollo/client";
 import { IALTitleInfo } from "../interfaces";
 import { TITLE_INFO } from "../api/graphql/anilist/titleInfo";
+import WebView from "react-native-webview";
 
 const SeriesPage = ({ navigation, route }: any) => {
   const { id, title } = route.params;
@@ -27,26 +29,36 @@ const SeriesPage = ({ navigation, route }: any) => {
     console.log("loading");
   }
 
+  if (data) {
+    console.log(data.Media.trailer);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         {data && (
-          <Pressable
-            style={styles.card}
-            onPress={() => {
-              navigation.navigate(RoutesNames.Episodes, {
-                title: data.Media.title.romaji,
-              });
-            }}
-          >
+          <>
             <Image
-              style={styles.poster}
-              source={{ uri: data.Media.coverImage.extraLarge }}
+              style={styles.banner}
+              source={{ uri: data.Media.bannerImage }}
             />
-            <Text numberOfLines={2} style={styles.title}>
-              {data.Media.title.romaji}
-            </Text>
-          </Pressable>
+            <Button
+              title={"List of episodes"}
+              onPress={() => {
+                navigation.navigate(RoutesNames.Episodes, {
+                  title: data.Media.title.romaji,
+                });
+              }}
+            />
+            <Text>{data.Media.description}</Text>
+            <WebView
+              style={styles.webview}
+              javaScriptEnabled={true}
+              source={{
+                uri: `https://www.youtube.com/embed/${data.Media.trailer.id}`,
+              }}
+            />
+          </>
         )}
       </ScrollView>
     </SafeAreaView>
@@ -57,23 +69,34 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  webview: {
+    height: 400,
+    width: "100%",
+    maxWidth: 600,
+  },
   scrollView: {
-    marginHorizontal: 20,
+    // marginHorizontal: 20,
   },
   poster: {
     width: 200,
     height: 300,
   },
   title: {
-    width: 200,
     paddingVertical: 5,
     paddingHorizontal: 10,
+    fontWeight: "bold",
+    fontSize: 30,
   },
   card: {
     height: 350,
     width: 200,
     backgroundColor: "red",
     marginVertical: 10,
+  },
+  banner: {
+    width: "100%",
+    height: 100,
+    resizeMode: "cover",
   },
 });
 

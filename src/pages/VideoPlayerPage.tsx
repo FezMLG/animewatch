@@ -1,9 +1,16 @@
-import { StyleSheet, View, Platform, ActivityIndicator } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Platform,
+  ActivityIndicator,
+  Dimensions,
+} from "react-native";
 import { ResizeMode, Video } from "expo-av";
 import React, { useRef, useState } from "react";
 import Controls from "../components/Controls";
 import { getCDAVideoUrl } from "../api/getCDAVideoUrl";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import * as ScreenOrientation from "expo-screen-orientation";
 
 const VideoPlayerPage = ({ navigation, route }: any) => {
   const { title, uri } = route.params;
@@ -16,6 +23,16 @@ const VideoPlayerPage = ({ navigation, route }: any) => {
   let { isTV } = Platform;
   if (DEBUG) {
     isTV = !isTV;
+  }
+
+  function setOrientation() {
+    if (Dimensions.get("window").height > Dimensions.get("window").width) {
+      //Device is in portrait mode, rotate to landscape mode.
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+    } else {
+      //Device is in landscape mode, rotate to portrait mode.
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
+    }
   }
 
   return (
@@ -34,6 +51,7 @@ const VideoPlayerPage = ({ navigation, route }: any) => {
           isLooping
           shouldPlay
           onPlaybackStatusUpdate={setStatus}
+          onFullscreenUpdate={setOrientation}
         />
       ) : (
         <View style={styles.container}>
