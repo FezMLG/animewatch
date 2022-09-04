@@ -34,7 +34,7 @@ const SeriesPage = ({ navigation, route }: any) => {
           <Pressable
             style={styles.card}
             onPress={() => {
-              navigation.navigate(RoutesNames.Watch, {
+              navigation.navigate(RoutesNames.Episodes, {
                 title: data.Media.title.romaji,
               });
             }}

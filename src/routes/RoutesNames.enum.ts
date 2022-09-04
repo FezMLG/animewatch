@@ -4,4 +4,5 @@ export enum RoutesNames {
   Browse = "Browse",
   Series = "Series",
   Watch = "Watch",
+  Episodes = "Episodes",
 }
