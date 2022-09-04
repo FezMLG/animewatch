@@ -32,8 +32,6 @@ export interface LinkElement {
 }
 
 const EpisodesListPage = ({ navigation, route }: any) => {
-  // const data = searchForTitle(route.params.title);
-  const queryClient = useQueryClient();
   const { isLoading, data } = useQuery([route.params.title], () =>
     getTitle(route.params.title)
   );
@@ -59,17 +57,18 @@ const EpisodesListPage = ({ navigation, route }: any) => {
                 <Text numberOfLines={2} style={styles.title}>
                   {episode.title}
                 </Text>
-                {episode.players.map((player: LinkElement) => {
+                {episode.players.map((player: LinkElement, index: number) => {
                   return (
                     <Pressable
-                      key={episode.id}
+                      key={index}
                       style={styles.card}
-                      // onPress={() => {
-                      //   navigation.navigate(RoutesNames.Series, {
-                      //     id: anime.id,
-                      //     title: anime.title.romaji,
-                      //   });
-                      // }}
+                      onPress={() => {
+                        navigation.navigate(RoutesNames.Watch, {
+                          uri: player.link,
+                          title: episode.title,
+                          player: player.name,
+                        });
+                      }}
                     >
                       <Text style={styles.title}>{player.name}</Text>
                       <Text style={styles.title}>{player.link}</Text>

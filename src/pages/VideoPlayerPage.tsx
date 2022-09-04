@@ -1,10 +1,15 @@
-import { StyleSheet, View, Platform } from "react-native";
+import { StyleSheet, View, Platform, ActivityIndicator } from "react-native";
 import { ResizeMode, Video } from "expo-av";
 import React, { useRef, useState } from "react";
 import Controls from "../components/Controls";
+import { getCDAVideoUrl } from "../api/getCDAVideoUrl";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const VideoPlayerPage = ({ navigation, route }: any) => {
-  const { title } = route.params;
+  const { title, uri } = route.params;
+  const { isLoading, data } = useQuery(["episodes" + title], () =>
+    getCDAVideoUrl(uri)
+  );
   const DEBUG = false;
   const video = useRef<Video>(null);
   const [status, setStatus] = useState<any>({});
@@ -15,18 +20,26 @@ const VideoPlayerPage = ({ navigation, route }: any) => {
 
   return (
     <View style={styles.container}>
-      <Video
-        ref={video}
-        style={styles.video}
-        source={{
-          uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
-        }}
-        useNativeControls={!isTV}
-        resizeMode={ResizeMode.CONTAIN}
-        isLooping
-        shouldPlay
-        onPlaybackStatusUpdate={setStatus}
-      />
+      {data ? (
+        <Video
+          ref={video}
+          style={styles.video}
+          source={{
+            uri: data
+              ? data
+              : "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+          }}
+          useNativeControls={!isTV}
+          resizeMode={ResizeMode.CONTAIN}
+          isLooping
+          shouldPlay
+          onPlaybackStatusUpdate={setStatus}
+        />
+      ) : (
+        <View style={styles.container}>
+          <ActivityIndicator size="large" />
+        </View>
+      )}
       {isTV && (
         <Controls
           status={status}
