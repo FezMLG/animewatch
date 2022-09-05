@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     height: 400,
     width: "100%",
     maxWidth: 600,
+    aspectRatio: 16 / 9,
   },
   scrollView: {
     // marginHorizontal: 20,
