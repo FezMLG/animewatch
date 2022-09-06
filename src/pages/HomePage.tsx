@@ -7,12 +7,6 @@ const HomePage = ({ navigation }: any) => {
   return (
     <View style={[styles.container, darkStyle.background]}>
       <Button
-        title="Play video"
-        onPress={() =>
-          navigation.navigate(RoutesNames.Player, { videoTitle: "Jane" })
-        }
-      />
-      <Button
         title="Browse"
         onPress={() => navigation.navigate(RoutesNames.Browse)}
       />
