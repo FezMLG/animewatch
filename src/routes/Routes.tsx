@@ -67,7 +67,7 @@ const Routes = () => {
           name={RoutesNames.Episodes}
           component={EpisodesListPage}
           options={({ route }: any) => ({
-            title: route.params.title,
+            title: `Episodes: ${route.params.title}`,
             animation: "slide_from_right",
             headerStyle: { backgroundColor: darkColor.C800 },
             headerTitleStyle: {
