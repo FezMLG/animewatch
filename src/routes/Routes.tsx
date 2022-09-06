@@ -7,6 +7,7 @@ import { RoutesNames } from "./RoutesNames.enum";
 import BrowsePage from "../pages/BrowsePage";
 import SeriesPage from "../pages/SeriesPage";
 import EpisodesListPage from "../pages/EpisodesListPage";
+import { darkColor } from "../styles/darkMode.style";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +18,14 @@ const Routes = () => {
         <Stack.Screen
           name={RoutesNames.Home}
           component={HomePage}
-          options={{ title: RoutesNames.Home, animation: "slide_from_right" }}
+          options={{
+            title: RoutesNames.Home,
+            animation: "slide_from_right",
+            headerStyle: { backgroundColor: darkColor.C800 },
+            headerTitleStyle: {
+              color: darkColor.Font,
+            },
+          }}
         />
         <Stack.Screen
           name={RoutesNames.Player}
@@ -25,6 +33,10 @@ const Routes = () => {
           options={{
             animation: "slide_from_right",
             headerShown: false,
+            headerStyle: { backgroundColor: darkColor.C800 },
+            headerTitleStyle: {
+              color: darkColor.Font,
+            },
           }}
         />
         <Stack.Screen
@@ -33,6 +45,10 @@ const Routes = () => {
           options={{
             title: RoutesNames.Browse,
             animation: "slide_from_right",
+            headerStyle: { backgroundColor: darkColor.C800 },
+            headerTitleStyle: {
+              color: darkColor.Font,
+            },
           }}
         />
         <Stack.Screen
@@ -41,6 +57,10 @@ const Routes = () => {
           options={({ route }: any) => ({
             title: route.params.title,
             animation: "slide_from_right",
+            headerStyle: { backgroundColor: darkColor.C800 },
+            headerTitleStyle: {
+              color: darkColor.Font,
+            },
           })}
         />
         <Stack.Screen
@@ -49,6 +69,10 @@ const Routes = () => {
           options={({ route }: any) => ({
             title: route.params.title,
             animation: "slide_from_right",
+            headerStyle: { backgroundColor: darkColor.C800 },
+            headerTitleStyle: {
+              color: darkColor.Font,
+            },
           })}
         />
         <Stack.Screen
@@ -57,6 +81,10 @@ const Routes = () => {
           options={{
             animation: "slide_from_right",
             headerShown: false,
+            headerStyle: { backgroundColor: darkColor.C800 },
+            headerTitleStyle: {
+              color: darkColor.Font,
+            },
           }}
         />
       </Stack.Navigator>

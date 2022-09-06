@@ -6,6 +6,7 @@ import {
   ScrollView,
   Pressable,
   Image,
+  View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { RoutesNames } from "../routes/RoutesNames.enum";
@@ -14,6 +15,7 @@ import { IALListOfAnime, IFrixySeries } from "../interfaces";
 import { searchForTitle } from "../api/rest/frixy/searchForTitle";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getTitle } from "../api/rest/frixy/getTitle";
+import { darkColor, darkStyle } from "../styles/darkMode.style";
 export interface Episode {
   id: string;
   title: string;
@@ -38,30 +40,21 @@ const EpisodesListPage = ({ navigation, route }: any) => {
   const [series, setSeries] = useState<IFrixySeries>();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, darkStyle.background]}>
       <ScrollView style={styles.scrollView}>
         {data &&
           data.episodes.map((episode: Episode) => {
             return (
-              <Pressable
-                key={episode.id}
-                style={styles.card}
-                // onPress={() => {
-                //   navigation.navigate(RoutesNames.Series, {
-                //     id: anime.id,
-                //     title: anime.title.romaji,
-                //   });
-                // }}
-              >
+              <View key={episode.id} style={[styles.card, darkStyle.card]}>
                 <Image style={styles.poster} source={{ uri: episode.poster }} />
-                <Text numberOfLines={2} style={styles.title}>
+                <Text numberOfLines={2} style={[styles.title, darkStyle.font]}>
                   {episode.title}
                 </Text>
                 {episode.players.map((player: LinkElement, index: number) => {
                   return (
                     <Pressable
                       key={index}
-                      style={styles.card}
+                      style={styles.buttonLink}
                       onPress={() => {
                         navigation.navigate(RoutesNames.Watch, {
                           uri: player.link,
@@ -70,12 +63,13 @@ const EpisodesListPage = ({ navigation, route }: any) => {
                         });
                       }}
                     >
-                      <Text style={styles.title}>{player.name}</Text>
-                      <Text style={styles.title}>{player.link}</Text>
+                      <Text style={[styles.title, darkStyle.font]}>
+                        {player.name}
+                      </Text>
                     </Pressable>
                   );
                 })}
-              </Pressable>
+              </View>
             );
           })}
       </ScrollView>
@@ -100,10 +94,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   card: {
-    height: 450,
+    minHeight: 350,
     width: 200,
-    backgroundColor: "red",
     marginVertical: 10,
+  },
+  buttonLink: {
+    minHeight: 50,
+    borderColor: "blue",
+    borderWidth: 1,
   },
 });
 

@@ -7,6 +7,7 @@ import {
   Pressable,
   Image,
   Button,
+  View,
 } from "react-native";
 import React from "react";
 import { RoutesNames } from "../routes/RoutesNames.enum";
@@ -14,6 +15,8 @@ import { useQuery } from "@apollo/client";
 import { IALTitleInfo } from "../interfaces";
 import { TITLE_INFO } from "../api/graphql/anilist/titleInfo";
 import WebView from "react-native-webview";
+import { darkStyle } from "../styles/darkMode.style";
+import { globalStyle } from "../styles/global.style";
 
 const SeriesPage = ({ navigation, route }: any) => {
   const { id, title } = route.params;
@@ -30,18 +33,18 @@ const SeriesPage = ({ navigation, route }: any) => {
   }
 
   if (data) {
-    console.log(data.Media.trailer);
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        {data && (
-          <>
-            <Image
-              style={styles.banner}
-              source={{ uri: data.Media.bannerImage }}
-            />
+    <SafeAreaView style={[styles.container, darkStyle.background]}>
+      {data && (
+        <ScrollView style={styles.scrollView}>
+          <Image
+            style={[styles.banner]}
+            source={{ uri: data.Media.bannerImage }}
+          />
+          <View style={styles.body}>
+            <View style={[globalStyle.spacer]}></View>
             <Button
               title={"List of episodes"}
               onPress={() => {
@@ -50,17 +53,19 @@ const SeriesPage = ({ navigation, route }: any) => {
                 });
               }}
             />
-            <Text>{data.Media.description}</Text>
+            <Text style={[darkStyle.font, globalStyle.spacer]}>
+              {data.Media.description}
+            </Text>
             <WebView
-              style={styles.webview}
+              style={[styles.webview, globalStyle.spacer]}
               javaScriptEnabled={true}
               source={{
                 uri: `https://www.youtube.com/embed/${data.Media.trailer.id}`,
               }}
             />
-          </>
-        )}
-      </ScrollView>
+          </View>
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 };
@@ -70,14 +75,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   webview: {
-    height: 400,
     width: "100%",
     maxWidth: 600,
     aspectRatio: 16 / 9,
   },
-  scrollView: {
-    // marginHorizontal: 20,
-  },
+  scrollView: {},
   poster: {
     width: 200,
     height: 300,
@@ -87,6 +89,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     fontWeight: "bold",
     fontSize: 30,
+  },
+  body: {
+    paddingHorizontal: 20,
   },
   card: {
     height: 350,

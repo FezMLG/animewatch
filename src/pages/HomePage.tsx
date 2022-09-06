@@ -1,10 +1,11 @@
 import { StyleSheet, View, Button } from "react-native";
 import React from "react";
 import { RoutesNames } from "../routes/RoutesNames.enum";
+import { darkStyle } from "../styles/darkMode.style";
 
 const HomePage = ({ navigation }: any) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, darkStyle.background]}>
       <Button
         title="Play video"
         onPress={() =>
@@ -22,7 +23,6 @@ const HomePage = ({ navigation }: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
