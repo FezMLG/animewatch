@@ -7,6 +7,7 @@ import {
   Pressable,
   Image,
   View,
+  ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { RoutesNames } from "../routes/RoutesNames.enum";
@@ -41,6 +42,7 @@ const EpisodesListPage = ({ navigation, route }: any) => {
   return (
     <SafeAreaView style={[styles.container, darkStyle.background]}>
       <ScrollView style={styles.scrollView}>
+        {isLoading && <ActivityIndicator size="large" />}
         {data &&
           data.episodes.map((episode: Episode) => {
             return (
@@ -79,6 +81,7 @@ const EpisodesListPage = ({ navigation, route }: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: "center",
   },
   scrollView: {
     marginHorizontal: 20,

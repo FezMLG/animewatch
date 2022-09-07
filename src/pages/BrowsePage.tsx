@@ -6,6 +6,7 @@ import {
   ScrollView,
   Pressable,
   Image,
+  ActivityIndicator,
 } from "react-native";
 import React from "react";
 import { RoutesNames } from "../routes/RoutesNames.enum";
@@ -19,13 +20,11 @@ const BrowsePage = ({ navigation }: any) => {
 
   // if (loading) return null;
   // if (error) return `Error! ${error}`;
-  if (loading) {
-    console.log("loading");
-  }
 
   return (
     <SafeAreaView style={[styles.container, darkStyle.background]}>
       <ScrollView style={styles.scrollView}>
+        {loading && <ActivityIndicator size="large" />}
         {data &&
           data.Page.media.map((anime, index) => {
             return (

@@ -8,6 +8,7 @@ import {
   Image,
   Button,
   View,
+  ActivityIndicator,
 } from "react-native";
 import React from "react";
 import { RoutesNames } from "../routes/RoutesNames.enum";
@@ -37,6 +38,7 @@ const SeriesPage = ({ navigation, route }: any) => {
 
   return (
     <SafeAreaView style={[styles.container, darkStyle.background]}>
+      {loading && <ActivityIndicator size="large" />}
       {data && (
         <ScrollView style={styles.scrollView}>
           <Image
