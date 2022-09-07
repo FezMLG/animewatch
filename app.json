@@ -4,7 +4,6 @@
     "slug": "animewatch",
     "version": "1.0.0",
     "owner": "fezmlg",
-    "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
     "backgroundColor": "#212121",
