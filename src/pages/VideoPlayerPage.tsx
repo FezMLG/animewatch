@@ -17,7 +17,7 @@ const VideoPlayerPage = ({ navigation, route }: any) => {
   const { isLoading, data } = useQuery(["episodes" + title], () =>
     getCDAVideoUrl(uri)
   );
-  const DEBUG = false;
+  const DEBUG = true;
   const video = useRef<Video>(null);
   const [status, setStatus] = useState<any>({});
   let { isTV } = Platform;
