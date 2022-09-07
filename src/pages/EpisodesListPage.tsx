@@ -37,7 +37,6 @@ const EpisodesListPage = ({ navigation, route }: any) => {
   const { isLoading, data } = useQuery([route.params.title], () =>
     getTitle(route.params.title)
   );
-  const [series, setSeries] = useState<IFrixySeries>();
 
   return (
     <SafeAreaView style={[styles.container, darkStyle.background]}>
