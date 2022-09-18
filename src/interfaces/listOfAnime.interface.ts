@@ -7,7 +7,7 @@ interface Page {
   media: Media[];
 }
 
-interface Media {
+export interface Media {
   id: number;
   title: Title;
   coverImage: CoverImage;

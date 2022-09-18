@@ -1,3 +1,4 @@
+import "react-native/tvos-types.d";
 import {
   StyleSheet,
   Text,
@@ -7,48 +8,34 @@ import {
   Pressable,
   Image,
   ActivityIndicator,
+  View,
 } from "react-native";
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { RoutesNames } from "../routes/RoutesNames.enum";
 import { useQuery } from "@apollo/client";
 import { LIST_OF_ANIME } from "../api/graphql/anilist/listOfAnime";
-import { IALListOfAnime } from "../interfaces";
-import { darkStyle } from "../styles/darkMode.style";
+import { IALListOfAnime, Media } from "../interfaces";
+import { darkColor, darkStyle } from "../styles/darkMode.style";
+import BrowseElement from "./BrowseElement";
 
 const BrowsePage = ({ navigation }: any) => {
   const { loading, error, data } = useQuery<IALListOfAnime>(LIST_OF_ANIME);
 
   // if (loading) return null;
   // if (error) return `Error! ${error}`;
-
   return (
     <SafeAreaView style={[styles.container, darkStyle.background]}>
-      <ScrollView style={styles.scrollView}>
-        {loading && <ActivityIndicator size="large" />}
-        {data &&
-          data.Page.media.map((anime, index) => {
-            return (
-              <Pressable
-                key={index}
-                style={[styles.card, darkStyle.card]}
-                onPress={() => {
-                  navigation.navigate(RoutesNames.Series, {
-                    id: anime.id,
-                    title: anime.title.romaji,
-                  });
-                }}
-              >
-                <Image
-                  style={styles.poster}
-                  source={{ uri: anime.coverImage.extraLarge }}
-                />
-                <Text numberOfLines={2} style={[styles.title, darkStyle.font]}>
-                  {anime.title.romaji}
-                </Text>
-              </Pressable>
-            );
-          })}
-      </ScrollView>
+      {loading ? (
+        <ActivityIndicator size="large" />
+      ) : (
+        <FlatList
+          data={data?.Page.media}
+          renderItem={({ item }) => (
+            <BrowseElement anime={item} navigation={navigation} />
+          )}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      )}
     </SafeAreaView>
   );
 };
@@ -76,6 +63,10 @@ const styles = StyleSheet.create({
     height: 350,
     width: 200,
     marginVertical: 10,
+  },
+  wrapperFocused: {
+    borderColor: "purple",
+    borderWidth: 1,
   },
 });
 
